@@ -283,4 +283,136 @@
     testiRender();
     testiRestart();
   }
+
+  /* ---------- Services: OvershootTicker Velox (port JS polos) ---------- */
+  var mountOvershootTicker = function (root) {
+    var stage = root.querySelector(".velox-overshoot-ticker__stage");
+    var rail = root.querySelector(".velox-overshoot-ticker__rail");
+    var slots = Array.prototype.slice.call(root.querySelectorAll(".velox-overshoot-ticker__slot"));
+    if (!stage || !rail || slots.length < 4) return function () {};
+    var loop = Math.floor(slots.length / 2);
+    var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var abort = new AbortController();
+    var signal = abort.signal;
+    var clones = new Map();
+    var observer, resized, restyled;
+    var disposed = false;
+    var timer = 0;
+    var dispose = function () {
+      disposed = true;
+      abort.abort();
+      if (observer) observer.disconnect();
+      if (resized) resized.disconnect();
+      if (restyled) restyled.disconnect();
+      clearTimeout(timer);
+      clones.forEach(function (clone) { clone.remove(); });
+      clones.clear();
+      root.removeAttribute("data-snap");
+      root.style.removeProperty("--k");
+      stage.removeAttribute("tabindex");
+    };
+    try {
+      var number = function (element, property, fallback) {
+        var value = parseFloat(getComputedStyle(element).getPropertyValue(property));
+        return Number.isFinite(value) ? value : fallback;
+      };
+      var size = "";
+      var fill = function () {
+        var width = slots[0].offsetWidth;
+        var height = slots[0].offsetHeight;
+        if (disposed || !width || !height) return;
+        var next = stage.clientWidth + " " + stage.clientHeight + " " + width;
+        if (next !== size) {
+          root.setAttribute("data-snap", "");
+          void root.offsetHeight;
+          root.removeAttribute("data-snap");
+        }
+        size = next;
+        var lead = number(stage, "--lead", 2);
+        var stepX = width * (100 - number(root, "--overshoot-ticker-overlap", 15)) / 100;
+        var stepY = stepX * Math.tan(number(root, "--overshoot-ticker-angle", 30) * Math.PI / 180);
+        var reachX = stepX > 0 ? Math.ceil((stage.clientWidth + width) / 2 / stepX) : Infinity;
+        var reachY = stepY > 0 ? Math.ceil((stage.clientHeight + height) / 2 / stepY) : Infinity;
+        var reach = Math.min(24, Math.max(2, Math.min(reachX, reachY) + 1));
+        var first = Math.floor(lead) - reach;
+        var last = loop + Math.ceil(lead) + reach;
+        clones.forEach(function (clone, i) {
+          if (i >= first && i <= last) return;
+          clone.remove();
+          clones.delete(i);
+        });
+        for (var i = first; i <= last; i++) {
+          if ((i >= 0 && i < slots.length) || clones.has(i)) continue;
+          var clone = slots[((i % loop) + loop) % loop].cloneNode(true);
+          clone.style.setProperty("--i", i);
+          clone.setAttribute("aria-hidden", "true");
+          clone.setAttribute("data-clone", "");
+          rail.appendChild(clone);
+          clones.set(i, clone);
+        }
+      };
+      var geometry = function () {
+        return ["--overshoot-ticker-card-max", "--overshoot-ticker-overlap", "--overshoot-ticker-angle"].map(function (name) { return root.style.getPropertyValue(name); }).join();
+      };
+      var lastGeometry = geometry();
+      var restyle = function () {
+        var next = geometry();
+        if (next === lastGeometry) return;
+        lastGeometry = next;
+        fill();
+      };
+      var k = 0;
+      var started = false;
+      var onScreen = false;
+      var hovered = stage.matches(":hover");
+      var focused = root.matches(":focus-within");
+      var pausesOnHover = function () { return root.getAttribute("data-pause-on-hover") !== "false"; };
+      var sync = function () {
+        if (disposed || !onScreen || (hovered && pausesOnHover()) || focused || reducedMotion.matches) {
+          clearTimeout(timer);
+          timer = 0;
+          return;
+        }
+        if (timer) return;
+        var dwell = number(root, "--overshoot-ticker-dwell", 750);
+        var settle = number(root, "--overshoot-ticker-step", 900) + number(root, "--overshoot-ticker-stagger", 84) * 6;
+        timer = setTimeout(advance, started ? settle + dwell : dwell);
+      };
+      var advance = function () {
+        timer = 0;
+        if (disposed) return;
+        if (k >= loop) {
+          root.setAttribute("data-snap", "");
+          k -= loop;
+          root.style.setProperty("--k", k);
+          void root.offsetHeight;
+          root.removeAttribute("data-snap");
+        }
+        k += 1;
+        started = true;
+        root.style.setProperty("--k", k);
+        sync();
+      };
+      stage.setAttribute("tabindex", "0");
+      stage.addEventListener("pointerenter", function () { hovered = true; sync(); }, { signal: signal });
+      stage.addEventListener("pointerleave", function () { hovered = false; sync(); }, { signal: signal });
+      root.addEventListener("focusin", function () { focused = true; sync(); }, { signal: signal });
+      root.addEventListener("focusout", function () { focused = false; sync(); }, { signal: signal });
+      reducedMotion.addEventListener("change", sync, { signal: signal });
+      observer = new IntersectionObserver(function (entries) { onScreen = entries[0].isIntersecting; sync(); });
+      observer.observe(root);
+      fill();
+      resized = new ResizeObserver(fill);
+      resized.observe(stage);
+      resized.observe(slots[0]);
+      restyled = new MutationObserver(function () { restyle(); sync(); });
+      restyled.observe(root, { attributes: true, attributeFilter: ["style", "data-pause-on-hover"] });
+    } catch (error) {
+      dispose();
+      throw error;
+    }
+    return dispose;
+  };
+  var tickerRoot = document.getElementById("servicesTicker");
+  if (tickerRoot) mountOvershootTicker(tickerRoot);
 })();
