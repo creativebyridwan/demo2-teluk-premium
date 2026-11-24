@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>عيادة النخبة لطب الأسنان، طرابلس</title>
+<title>عيادة النخبة لجراحة وتجميل الأسنان، طرابلس</title>
+<link rel="icon" href="assets/logo-mark.jpg">
 <meta name="description" content="عيادة أسنان في طرابلس: زراعة الأسنان، ابتسامة هوليود، الفينير، التقويم الشفاف. احجز موعدك اليوم.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,13 +16,11 @@
 <!-- ============ 1. Header ============ -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
-    <a class="brand" href="#home" aria-label="عيادة النخبة لطب الأسنان، الصفحة الرئيسية">
-      <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 4.6 5 8.2c0 1.9.7 3.3 1.4 4.8.6 1.3 1 2.9 1.4 4.8.3 1.3 1 2.2 2 2.2 1.1 0 1.7-.9 2-2.1.2-.9.5-1.9 1.2-1.9s1 1 1.2 1.9c.3 1.2.9 2.1 2 2.1 1 0 1.7-.9 2-2.2.4-1.9.8-3.5 1.4-4.8.7-1.5 1.4-2.9 1.4-4.8C19 4.6 15.9 2 12 2z"/></svg>
-      </span>
+    <a class="brand" href="#home" aria-label="عيادة النخبة لجراحة وتجميل الأسنان، الصفحة الرئيسية">
+      <img class="brand__logo" src="assets/logo-mark.jpg" alt="شعار عيادة النخبة" width="1000" height="960">
       <span>
         <span class="brand__name">عيادة النخبة</span>
-        <span class="brand__tag">لطب الأسنان، طرابلس</span>
+        <span class="brand__tag">لجراحة وتجميل الأسنان، طرابلس</span>
       </span>
     </a>
     <nav class="main-nav" id="mainNav" aria-label="التنقل الرئيسي">
@@ -62,8 +61,38 @@
         </a>
       </div>
     </div>
-    <div class="hero__media">
-      <img src="assets/hero.jpg" alt="طبيب أسنان مع مريضة مبتسمة داخل عيادة حديثة" width="1920" height="1280">
+    <div class="hero__panel" aria-label="فريق العيادة والمرضى">
+      <div class="hero-logos" aria-hidden="true">
+        <div class="hero-logos-track">
+          <span>أطباء معتمدون</span><span>خبرة أكثر من 15 سنة</span><span>أكثر من 10.000 ابتسامة</span><span>تعقيم بمعايير طبية</span><span>أسعار واضحة</span><span>حجز في نفس اليوم</span><span>علاج بدون خوف</span>
+          <span>أطباء معتمدون</span><span>خبرة أكثر من 15 سنة</span><span>أكثر من 10.000 ابتسامة</span><span>تعقيم بمعايير طبية</span><span>أسعار واضحة</span><span>حجز في نفس اليوم</span><span>علاج بدون خوف</span>
+        </div>
+      </div>
+      <div class="hero-stage" id="heroStage" role="region" aria-roledescription="carousel" aria-label="فريق العيادة والمرضى">
+        <article class="hero-card" data-index="0">
+          <img src="assets/doctor-female.jpg" alt="صورة الدكتورة سارة الحداد" width="1086" height="1448" loading="eager">
+          <div class="hero-card__body"><strong>د. سارة الحداد</strong><span>أخصائية تجميل الأسنان</span></div>
+        </article>
+        <article class="hero-card" data-index="1">
+          <img src="assets/doctor-male.jpg" alt="صورة الدكتور أحمد النجار" width="1086" height="1448" loading="lazy">
+          <div class="hero-card__body"><strong>د. أحمد النجار</strong><span>استشاري زراعة الأسنان</span></div>
+        </article>
+        <article class="hero-card" data-index="2">
+          <img src="assets/patient-lina.jpg" alt="صورة ليلى، مريضة ابتسامة هوليود" width="1086" height="1448" loading="lazy">
+          <div class="hero-card__body"><strong>ليلى</strong><span>مريضة، ابتسامة هوليود</span></div>
+        </article>
+        <article class="hero-card" data-index="3">
+          <img src="assets/patient-omar.jpg" alt="صورة عمر، مريض تقويم شفاف" width="1086" height="1448" loading="lazy">
+          <div class="hero-card__body"><strong>أ. عمر</strong><span>مريض، تقويم شفاف</span></div>
+        </article>
+      </div>
+      <div class="hero-controls">
+        <div class="hero-dots" id="heroDots" role="tablist" aria-label="اختر صورة"></div>
+        <div class="hero-arrows">
+          <button class="hero-arrow" id="heroPrev" type="button" aria-label="السابق">&#8594;</button>
+          <button class="hero-arrow" id="heroNext" type="button" aria-label="التالي">&#8592;</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -72,54 +101,21 @@
 <section class="stats" aria-label="أرقام العيادة">
   <div class="container stats-inner">
     <div class="stat reveal">
-      <div class="stat__num">+15</div>
+      <div class="stat__num" data-target="15" data-prefix="+" data-decimals="0">+15</div>
       <div class="stat__label">سنة خبرة</div>
     </div>
     <div class="stat reveal">
-      <div class="stat__num">+12,000</div>
+      <div class="stat__num" data-target="12000" data-prefix="+" data-decimals="0">+12,000</div>
       <div class="stat__label">ابتسامة عالجناها</div>
     </div>
     <div class="stat reveal">
-      <div class="stat__num">4.9</div>
+      <div class="stat__num" data-target="4.9" data-prefix="" data-decimals="1">4.9</div>
       <div class="stat__label">تقييم المرضى من 5</div>
     </div>
   </div>
 </section>
 
-<!-- ============ 3. Trust bar ============ -->
-<section class="trust" aria-label="لماذا تختارنا">
-  <div class="container trust-inner">
-    <div class="trust-item reveal">
-      <span class="trust-item__icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      </span>
-      <div>
-        <strong>ترخيص رسمي</strong>
-        <span>عيادة مرخصة تعمل وفق معايير التعقيم المعتمدة</span>
-      </div>
-    </div>
-    <div class="trust-item reveal">
-      <span class="trust-item__icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      </span>
-      <div>
-        <strong>استشارة أولى مجانية</strong>
-        <span>فحص وتقييم أولي دون تكلفة</span>
-      </div>
-    </div>
-    <div class="trust-item reveal">
-      <span class="trust-item__icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      </span>
-      <div>
-        <strong>حجز موعد في نفس اليوم</strong>
-        <span>مواعيد متاحة اليوم للحالات العاجلة</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 4. Services ============ -->
+<!-- ============ 3. Services ============ -->
 <section class="section section--cream" id="services">
   <div class="container">
     <div class="section-head reveal">
@@ -128,30 +124,22 @@
     </div>
     <div class="services-featured">
       <article class="service-card service-card--lead reveal">
-        <span class="service-card__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 4.6 5 8.2c0 1.9.7 3.3 1.4 4.8.6 1.3 1 2.9 1.4 4.8.3 1.3 1 2.2 2 2.2 1.1 0 1.7-.9 2-2.1.2-.9.5-1.9 1.2-1.9s1 1 1.2 1.9c.3 1.2.9 2.1 2 2.1 1 0 1.7-.9 2-2.2.4-1.9.8-3.5 1.4-4.8.7-1.5 1.4-2.9 1.4-4.8C19 4.6 15.9 2 12 2z"/></svg>
-        </span>
+        <img class="service-card__img" src="assets/service-implant.jpg" alt="زراعة الأسنان، برغي زرعة يمسك بالملقط فوق نموذج فك" width="1672" height="941" loading="lazy">
         <h3>زراعة الأسنان</h3>
         <p>تعويض الأسنان المفقودة بثبات يدوم، مع تخطيط رقمي ثلاثي الأبعاد قبل الزراعة.</p>
       </article>
       <article class="service-card reveal">
-        <span class="service-card__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        </span>
+        <img class="service-card__img" src="assets/service-hollywood.jpg" alt="ابتسامة هوليود، ابتسامة طبيعية" width="1672" height="941" loading="lazy">
         <h3>ابتسامة هوليود</h3>
         <p>تصميم ابتسامة متكامل يناسب ملامح وجهك ولون بشرتك.</p>
       </article>
       <article class="service-card reveal">
-        <span class="service-card__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10z"/></svg>
-        </span>
+        <img class="service-card__img" src="assets/service-veneer.jpg" alt="الفينير، قشرة خزفية يمسك بها الملقط فوق نموذج أسنان" width="1672" height="941" loading="lazy">
         <h3>الفينير</h3>
         <p>قشور خزفية رقيقة تصحح اللون والشكل وتحافظ على السن الطبيعي.</p>
       </article>
       <article class="service-card reveal">
-        <span class="service-card__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0"/><path d="M8.5 13.5l1.5 1.5 3.5-3.5"/></svg>
-        </span>
+        <img class="service-card__img" src="assets/service-aligner.jpg" alt="التقويم الشفاف، قالب شفاف يمسك به اليد" width="1672" height="941" loading="lazy">
         <h3>التقويم الشفاف</h3>
         <p>تقويم غير مرئي يصحح اصطفاف الأسنان دون أسلاك معدنية.</p>
       </article>
@@ -159,6 +147,7 @@
     <div class="services-list">
       <div class="service-row reveal">
         <span class="service-row__num" aria-hidden="true">05</span>
+        <img class="service-row__img" src="assets/service-root-canal.jpg" alt="علاج الجذور، ملف قناة الجذر تحت المجهر مع حاجز مطاطي" width="608" height="958" loading="lazy">
         <div>
           <h3>علاج الجذور</h3>
           <p>علاج دقيق يحافظ على السن الطبيعي ويزيل الألم من جذوره.</p>
@@ -166,15 +155,15 @@
       </div>
       <div class="service-row reveal">
         <span class="service-row__num" aria-hidden="true">06</span>
-        <div>
-          <h3>حشو الأسنان</h3>
+        <img class="service-row__img" src="assets/service-filling.jpg" alt="حشو الأسنان، علاج السن" width="1672" height="941" loading="lazy">
+
           <p>حشوات تجميلية بلون السن الطبيعي تدوم طويلا.</p>
         </div>
       </div>
       <div class="service-row reveal">
         <span class="service-row__num" aria-hidden="true">07</span>
-        <div>
-          <h3>تنظيف الأسنان</h3>
+        <img class="service-row__img" src="assets/service-cleaning.jpg" alt="تنظيف الأسنان بالموجات فوق الصوتية" width="1672" height="941" loading="lazy">
+
           <p>تنظيف وتلميع يحافظ على صحة اللثة ويمنع التسوس.</p>
         </div>
       </div>
@@ -189,20 +178,72 @@
       <h2>الأسعار</h2>
       <p>أسعار واضحة من أول زيارة، بلا مفاجآت. هذه الأرقام استرشادية من متوسط السوق في طرابلس.</p>
     </div>
-    <div class="price-wrap reveal">
-      <table class="price">
-        <thead>
-          <tr><th>الخدمة</th><th>السعر الاسترشادي (د.ل.)</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>الكشف والاستشارة</td><td>27 - 60</td></tr>
-          <tr><td>تنظيف الأسنان</td><td>100 - 200</td></tr>
-          <tr><td>حشو تجميلي</td><td>86 - 189</td></tr>
-          <tr><td>تبييض الأسنان</td><td>429 - 959</td></tr>
-          <tr><td>الفينير (للسن الواحد)</td><td>489 - 1,099</td></tr>
-          <tr><td>زراعة الأسنان (للزرعة الواحدة)</td><td>2,199 - 4,799</td></tr>
-        </tbody>
-      </table>
+    <div class="plans">
+      <article class="plan reveal">
+        <img class="plan__img" src="assets/service-cleaning.jpg" alt="الفحص والتنظيف، تنظيف الأسنان بالموجات فوق الصوتية" width="1672" height="941" loading="lazy">
+        <h3>الفحص والتنظيف</h3>
+        <p>البداية الصحيحة لصحة فمك، فحص شامل وتنظيف يحافظ على لثتك.</p>
+        <div class="plan__price"><span class="plan__from">تبدأ من</span> <span class="plan__amount">27</span> <span class="plan__cur">د.ل.</span></div>
+        <div class="plan__per">للكشف والاستشارة</div>
+        <a class="btn btn--outline" href="#booking">احجز موعدك</a>
+        <div class="plan__group">
+          <h4>تشمل</h4>
+          <ul>
+            <li><span aria-hidden="true">✓</span> الكشف والاستشارة: 27 - 60 د.ل.</li>
+            <li><span aria-hidden="true">✓</span> تنظيف الأسنان: 100 - 200 د.ل.</li>
+            <li><span aria-hidden="true">✓</span> تلميع بعد التنظيف</li>
+          </ul>
+        </div>
+      </article>
+      <article class="plan reveal">
+        <img class="plan__img" src="assets/service-root-canal.jpg" alt="العلاج والحشو، علاج الجذور تحت المجهر" width="608" height="958" loading="lazy">
+        <h3>العلاج والحشو</h3>
+        <p>علاج يحافظ على سنك الطبيعي ويزيل الألم من جذوره.</p>
+        <div class="plan__price"><span class="plan__from">تبدأ من</span> <span class="plan__amount">86</span> <span class="plan__cur">د.ل.</span></div>
+        <div class="plan__per">للحشو التجميلي</div>
+        <a class="btn btn--outline" href="#booking">احجز موعدك</a>
+        <div class="plan__group">
+          <h4>تشمل</h4>
+          <ul>
+            <li><span aria-hidden="true">✓</span> حشو تجميلي: 86 - 189 د.ل.</li>
+            <li><span aria-hidden="true">✓</span> علاج الجذور: يحدد بعد الفحص</li>
+            <li><span aria-hidden="true">✓</span> حشوات بلون السن الطبيعي</li>
+          </ul>
+        </div>
+      </article>
+      <article class="plan plan--highlight reveal">
+        <div class="plan__banner">الأكثر طلبا</div>
+        <img class="plan__img" src="assets/service-hollywood.jpg" alt="تجميل الابتسامة، ابتسامة طبيعية" width="1672" height="941" loading="lazy">
+        <h3>تجميل الابتسامة</h3>
+        <p>ابتسامة مصممة على مقاس ملامحك، طبيعية ولا تبدو كعلاج تجميلي.</p>
+        <div class="plan__price"><span class="plan__from">تبدأ من</span> <span class="plan__amount">429</span> <span class="plan__cur">د.ل.</span></div>
+        <div class="plan__per">للتبييض</div>
+        <a class="btn btn--primary" href="#booking">احجز موعدك</a>
+        <div class="plan__group">
+          <h4>تشمل</h4>
+          <ul>
+            <li><span aria-hidden="true">✓</span> تبييض الأسنان: 429 - 959 د.ل.</li>
+            <li><span aria-hidden="true">✓</span> الفينير: 489 - 1,099 د.ل. للسن الواحد</li>
+            <li><span aria-hidden="true">✓</span> ابتسامة هوليود: تصميم متكامل، يحدد بعد الاستشارة</li>
+          </ul>
+        </div>
+      </article>
+      <article class="plan reveal">
+        <img class="plan__img" src="assets/service-implant.jpg" alt="زراعة الأسنان، برغي زرعة فوق نموذج فك" width="1672" height="941" loading="lazy">
+        <h3>زراعة الأسنان</h3>
+        <p>تعويض ثابت يدوم، مع تخطيط رقمي ثلاثي الأبعاد قبل الزراعة.</p>
+        <div class="plan__price"><span class="plan__from">تبدأ من</span> <span class="plan__amount">2,199</span> <span class="plan__cur">د.ل.</span></div>
+        <div class="plan__per">للزرعة الواحدة</div>
+        <a class="btn btn--outline" href="#booking">احجز موعدك</a>
+        <div class="plan__group">
+          <h4>تشمل</h4>
+          <ul>
+            <li><span aria-hidden="true">✓</span> زراعة الأسنان: 2,199 - 4,799 د.ل. للزرعة</li>
+            <li><span aria-hidden="true">✓</span> تخطيط رقمي ثلاثي الأبعاد قبل الزراعة</li>
+            <li><span aria-hidden="true">✓</span> خطة مكتوبة بالتكلفة والمدة مسبقا</li>
+          </ul>
+        </div>
+      </article>
     </div>
     <p class="price-note reveal"><strong>ملاحظة:</strong> أسعار استرشادية من متوسط السوق في طرابلس، وتُحدد الأسعار النهائية بعد الفحص.</p>
   </div>
@@ -308,34 +349,46 @@
       <h2>ماذا قال مرضانا</h2>
       <p>تجارب حقيقية من مرضى أكملوا علاجهم معنا.</p>
     </div>
-    <div class="testi-grid">
-      <article class="testi testi--lead reveal">
-        <span class="testi__mark" aria-hidden="true">&ldquo;</span>
-        <blockquote>شرح لي الطبيب كل خطوة قبل أن نبدأ، وعرفت التكلفة كاملة من أول زيارة. زراعة الأسنان كانت أسهل مما توقعت.</blockquote>
-        <div class="testi__who">
-          <strong>أ. محمد</strong>
-          <span class="testi__tag">زراعة الأسنان</span>
-          <span class="testi__stars" aria-label="تقييم 5 من 5">★★★★★</span>
+    <div class="testi-carousel reveal" id="testiCarousel">
+      <div class="testi-stage" id="testiStage">
+        <article class="testi testi--lead is-active" data-index="0">
+          <span class="testi__mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>شرح لي الطبيب كل خطوة قبل أن نبدأ، وعرفت التكلفة كاملة من أول زيارة. زراعة الأسنان كانت أسهل مما توقعت.</blockquote>
+          <div class="testi__who">
+            <span class="testi__avatar testi__avatar--initial" aria-hidden="true">م</span>
+            <strong>أ. محمد</strong>
+            <span class="testi__tag">زراعة الأسنان</span>
+            <span class="testi__stars" aria-label="تقييم 5 من 5">★★★★★</span>
+          </div>
+        </article>
+        <article class="testi" data-index="1">
+          <span class="testi__mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>ابتسامتي تغيرت تماما، والنتيجة طبيعية ولم يشعر أحد أنها علاج تجميلي.</blockquote>
+          <div class="testi__who">
+            <img class="testi__avatar" src="assets/patient-lina.jpg" alt="صورة ليلى" width="48" height="48" loading="lazy">
+            <strong>أ. ليلى</strong>
+            <span class="testi__tag">ابتسامة هوليود</span>
+            <span class="testi__stars" aria-label="تقييم 5 من 5">★★★★★</span>
+          </div>
+        </article>
+        <article class="testi" data-index="2">
+          <span class="testi__mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>التقويم الشفاف كان مريحا، وكنت أتابع تقدمي في كل زيارة.</blockquote>
+          <div class="testi__who">
+            <img class="testi__avatar" src="assets/patient-omar.jpg" alt="صورة عمر" width="48" height="48" loading="lazy">
+            <strong>أ. عمر</strong>
+            <span class="testi__tag">تقويم شفاف</span>
+            <span class="testi__stars" aria-label="تقييم 5 من 5">★★★★★</span>
+          </div>
+        </article>
+      </div>
+      <div class="testi-controls">
+        <div class="testi-dots" id="testiDots" role="tablist" aria-label="اختر رأيا"></div>
+        <div class="testi-arrows">
+          <button class="testi-arrow" id="testiPrev" type="button" aria-label="الرأي السابق">&#8594;</button>
+          <button class="testi-arrow" id="testiNext" type="button" aria-label="الرأي التالي">&#8592;</button>
         </div>
-      </article>
-      <article class="testi reveal">
-        <span class="testi__mark" aria-hidden="true">&ldquo;</span>
-        <blockquote>ابتسامتي تغيرت تماما، والنتيجة طبيعية ولم يشعر أحد أنها علاج تجميلي.</blockquote>
-        <div class="testi__who">
-          <strong>أ. ليلى</strong>
-          <span class="testi__tag">ابتسامة هوليود</span>
-          <span class="testi__stars" aria-label="تقييم 5 من 5">★★★★★</span>
-        </div>
-      </article>
-      <article class="testi reveal">
-        <span class="testi__mark" aria-hidden="true">&ldquo;</span>
-        <blockquote>التقويم الشفاف كان مريحا، وكنت أتابع تقدمي في كل زيارة.</blockquote>
-        <div class="testi__who">
-          <strong>أ. عمر</strong>
-          <span class="testi__tag">تقويم شفاف</span>
-          <span class="testi__stars" aria-label="تقييم 5 من 5">★★★★★</span>
-        </div>
-      </article>
+      </div>
     </div>
   </div>
 </section>
@@ -497,14 +550,8 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <a class="brand" href="#home">
-          <span class="brand__mark" aria-hidden="true" style="background: var(--mint); color: var(--ink-deep);">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 4.6 5 8.2c0 1.9.7 3.3 1.4 4.8.6 1.3 1 2.9 1.4 4.8.3 1.3 1 2.2 2 2.2 1.1 0 1.7-.9 2-2.1.2-.9.5-1.9 1.2-1.9s1 1 1.2 1.9c.3 1.2.9 2.1 2 2.1 1 0 1.7-.9 2-2.2.4-1.9.8-3.5 1.4-4.8.7-1.5 1.4-2.9 1.4-4.8C19 4.6 15.9 2 12 2z"/></svg>
-          </span>
-          <span>
-            <span class="brand__name">عيادة النخبة</span>
-            <span class="brand__tag">لطب الأسنان، طرابلس</span>
-          </span>
+        <a href="#home" aria-label="عيادة النخبة، العودة إلى الأعلى">
+          <img class="footer__logo" src="assets/logo-nukhba.jpg" alt="شعار عيادة النخبة لجراحة وتجميل الأسنان" width="2000" height="2000" loading="lazy">
         </a>
       </div>
       <nav class="footer-nav" aria-label="روابط التذييل">
