@@ -281,7 +281,7 @@ p { margin: 0; }
 /* ---------- Services: OvershootTicker Velox (port CSS polos, token demo2) ---------- */
 .velox-overshoot-ticker{
  --overshoot-ticker-card-max:640px;--overshoot-ticker-center-size:100;--overshoot-ticker-angle:30deg;--overshoot-ticker-overlap:15;--overshoot-ticker-overshoot:1.28;
- --overshoot-ticker-step:900ms;--overshoot-ticker-dwell:750ms;--overshoot-ticker-stagger:84ms;--overshoot-ticker-radius:20px;
+ --overshoot-ticker-step:900ms;--overshoot-ticker-dwell:1000ms;--overshoot-ticker-stagger:84ms;--overshoot-ticker-radius:20px;
  --overshoot-ticker-bg:var(--ink);--overshoot-ticker-card:#ffffff;--overshoot-ticker-ink:var(--ink-deep);
  --overshoot-ticker-title-font:"Cairo";--overshoot-ticker-title-font-weight:700;--overshoot-ticker-title-font-size:27px;
  --overshoot-ticker-title-font-spacing:0px;--overshoot-ticker-title-font-size-value:27;
@@ -319,7 +319,7 @@ p { margin: 0; }
 .velox-overshoot-ticker__frame{aspect-ratio:16 / 10;border-radius:calc(var(--overshoot-ticker-radius) * .7);overflow:hidden;background:#e9e9ea}
 .velox-overshoot-ticker__image{display:block;width:100%;height:100%;object-fit:cover}
 .velox-overshoot-ticker__title{
- margin:0;padding:calc(var(--card) * .05) calc(var(--card) * .015) calc(var(--card) * .022);
+ margin:0;padding:calc(var(--card) * .05) calc(var(--card) * .12) calc(var(--card) * .022) calc(var(--card) * .015);
  font-size:clamp(calc(var(--overshoot-ticker-title-font-size) * 13 / 27),calc(var(--card) * .047 * var(--overshoot-ticker-title-font-size-value) / 27),var(--overshoot-ticker-title-font-size));
  font-weight:var(--overshoot-ticker-title-font-weight);letter-spacing:calc(-.025em + var(--overshoot-ticker-title-font-spacing));
  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -330,6 +330,32 @@ p { margin: 0; }
 @media (prefers-reduced-motion:reduce){
  .velox-overshoot-ticker__slot{transition:none}
 }
+
+/* ---------- Services bawah ticker: 7 kartu seragam (bento lama, tanpa baris) ---------- */
+.services-featured {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+.service-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  overflow: hidden;
+}
+.service-card--lead { background: var(--ink); color: #FFFFFF; border-color: var(--ink); }
+.service-card__img {
+  display: block;
+  width: calc(100% + 48px);
+  height: 180px;
+  object-fit: cover;
+  margin: -24px -24px 16px;
+}
+.service-card h3 { font-size: 19px; margin-bottom: 8px; }
+.service-card p { color: var(--muted); font-size: 15px; line-height: 1.7; }
+.service-card.service-card--lead p { color: #DCEEE7; }
 
 /* ---------- Prices (Pricing 10: 4 kartu paket, foto ganti logo) ---------- */
 .plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; }
@@ -739,7 +765,7 @@ p { margin: 0; }
 .wa-float:hover::before, .wa-float:hover::after,
 .wa-float:focus-visible::before, .wa-float:focus-visible::after { animation-play-state: paused; }
 .wa-float:active { transform: scale(0.97); }
-.wa-float svg, .wa-float span { position: relative; z-index: 1; }
+.wa-float svg, .wa-float span, .wa-float .wa-avatar { position: relative; z-index: 1; }
 .wa-float svg { width: 22px; height: 22px; }
 
 /* ---------- Tombol WA breathe ala Glow Button (memanjang lalu mengecil, 6 detik) ---------- */
@@ -749,9 +775,19 @@ p { margin: 0; }
   100% { max-width: 220px; padding: 12px 20px; gap: 8px; }
 }
 @keyframes wa-breathe-text {
-  0%, 45% { max-width: 80px; opacity: 1; }
+  0%, 45% { max-width: 100px; opacity: 1; }
   55%, 90% { max-width: 0; opacity: 0; }
-  100% { max-width: 80px; opacity: 1; }
+  100% { max-width: 100px; opacity: 1; }
+}
+@keyframes wa-breathe-avatar {
+  0%, 45% { width: 32px; opacity: 1; }
+  55%, 90% { width: 0; opacity: 0; }
+  100% { width: 32px; opacity: 1; }
+}
+@keyframes wa-breathe-icon {
+  0%, 45% { width: 0; opacity: 0; }
+  55%, 90% { width: 22px; opacity: 1; }
+  100% { width: 0; opacity: 0; }
 }
 .wa-animated {
   max-width: 220px;
@@ -763,10 +799,24 @@ p { margin: 0; }
 .wa-animated span {
   display: inline-block;
   min-width: 0;
-  max-width: 80px;
+  max-width: 100px;
   overflow: hidden;
   white-space: nowrap;
   animation: wa-breathe-text 6s ease-in-out infinite;
+}
+.wa-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  flex: none;
+  min-width: 0;
+  animation: wa-breathe-avatar 6s ease-in-out infinite;
+}
+.wa-animated svg {
+  min-width: 0;
+  animation: wa-breathe-icon 6s ease-in-out infinite;
 }
 .wa-animated:hover, .wa-animated:focus-visible {
   animation: none;
@@ -776,8 +826,18 @@ p { margin: 0; }
 }
 .wa-animated:hover span, .wa-animated:focus-visible span {
   animation: none;
-  max-width: 80px;
+  max-width: 100px;
   opacity: 1;
+}
+.wa-animated:hover .wa-avatar, .wa-animated:focus-visible .wa-avatar {
+  animation: none;
+  width: 32px;
+  opacity: 1;
+}
+.wa-animated:hover svg, .wa-animated:focus-visible svg {
+  animation: none;
+  width: 0;
+  opacity: 0;
 }
 .btn.wa-animated {
   position: relative;
@@ -798,7 +858,7 @@ p { margin: 0; }
 .btn.wa-animated::after { filter: blur(12px); opacity: 0.55; }
 .btn.wa-animated:hover::before, .btn.wa-animated:hover::after,
 .btn.wa-animated:focus-visible::before, .btn.wa-animated:focus-visible::after { animation-play-state: paused; }
-.btn.wa-animated svg, .btn.wa-animated span { position: relative; z-index: 1; }
+.btn.wa-animated svg, .btn.wa-animated span, .btn.wa-animated .wa-avatar { position: relative; z-index: 1; }
 
 /* ---------- Reveal ---------- */
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity 600ms ease, transform 600ms ease; }
@@ -809,6 +869,7 @@ p { margin: 0; }
   .hero-inner { grid-template-columns: 1fr; gap: 32px; }
   .hero-stage { height: 380px; }
   .ba-layout { grid-template-columns: 1fr; gap: 24px; }
+  .services-featured { grid-template-columns: repeat(2, 1fr); }
   .plans { grid-template-columns: repeat(2, 1fr); }
   .plan { margin-top: 0; }
   .doctor-list { grid-template-columns: 1fr; }
@@ -836,6 +897,8 @@ p { margin: 0; }
   .main-nav a { padding: 12px; }
   .nav-toggle { display: flex; }
   .header-actions .btn { display: none; }
+  .services-featured { grid-template-columns: 1fr; }
+  .service-card__img { height: 160px; }
   .plans { grid-template-columns: 1fr; }
   .plan__img { height: 180px; }
   .doctor-card { grid-template-columns: 1fr; }
@@ -856,6 +919,7 @@ p { margin: 0; }
   .hero-card { transition: none; }
   .wa-float::before, .wa-float::after { animation: none; }
   .btn.wa-animated::before, .btn.wa-animated::after { animation: none; }
-  .wa-animated, .wa-animated span { animation: none; }
+  .wa-animated, .wa-animated span, .wa-animated .wa-avatar, .wa-animated svg { animation: none; }
+  .wa-animated svg { width: 0; opacity: 0; }
   .testi { transition: none; }
 }
