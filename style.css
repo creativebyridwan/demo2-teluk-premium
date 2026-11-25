@@ -52,7 +52,7 @@ h1, h2, h3 {
 
 p { margin: 0; }
 
-.container { max-width: 1120px; margin-inline: auto; padding-inline: 24px; }
+.container { max-width: 1280px; margin-inline: auto; padding-inline: 24px; }
 
 .section { padding-block: 64px; }
 .section--white { background: var(--white); }
@@ -217,7 +217,7 @@ p { margin: 0; }
 @keyframes hero-marquee { from { transform: translateX(0); } to { transform: translateX(50%); } }
 .hero-stage {
   position: relative;
-  height: 400px;
+  height: 360px;
   perspective: 1200px;
   touch-action: pan-y;
   user-select: none;
@@ -319,7 +319,7 @@ p { margin: 0; }
 .velox-overshoot-ticker__frame{aspect-ratio:16 / 10;border-radius:calc(var(--overshoot-ticker-radius) * .7);overflow:hidden;background:#e9e9ea}
 .velox-overshoot-ticker__image{display:block;width:100%;height:100%;object-fit:cover}
 .velox-overshoot-ticker__title{
- margin:0;padding:calc(var(--card) * .05) calc(var(--card) * .12) calc(var(--card) * .022) calc(var(--card) * .015);
+ margin:0;padding:calc(var(--card) * .05) calc(var(--card) * .03) calc(var(--card) * .022);text-align:center;
  font-size:clamp(calc(var(--overshoot-ticker-title-font-size) * 13 / 27),calc(var(--card) * .047 * var(--overshoot-ticker-title-font-size-value) / 27),var(--overshoot-ticker-title-font-size));
  font-weight:var(--overshoot-ticker-title-font-weight);letter-spacing:calc(-.025em + var(--overshoot-ticker-title-font-spacing));
  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -405,8 +405,6 @@ p { margin: 0; }
 .plan__group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .plan__group li { display: flex; gap: 8px; align-items: flex-start; font-size: 15px; line-height: 1.7; }
 .plan__group li span { color: var(--accent); font-weight: 800; flex: none; }
-.price-note { margin-top: 16px; color: var(--muted); font-size: 15px; }
-.price-note strong { color: var(--ink); }
 
 /* ---------- Before / after ---------- */
 .ba-layout { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 48px; align-items: center; }
@@ -528,6 +526,7 @@ p { margin: 0; }
 }
 .step h3 { font-size: 18px; margin-bottom: 8px; }
 .step p { color: var(--muted); font-size: 15px; line-height: 1.7; }
+.step__img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--mint-soft); }
 
 /* ---------- Testimonials (carousel, satu tampil) ---------- */
 .testi-carousel { max-width: 780px; margin-inline: auto; }
@@ -635,6 +634,7 @@ p { margin: 0; }
 .booking-side h3 { font-size: 21px; }
 .booking-side p { color: #DCEEE7; }
 .booking-side a { color: #FFFFFF; font-weight: 700; text-decoration: none; direction: ltr; unicode-bidi: embed; display: inline-block; }
+.booking-side a.btn--light { color: var(--ink); direction: rtl; unicode-bidi: normal; }
 .booking-side .btn { align-self: flex-start; }
 .booking-success { display: none; text-align: center; padding-block: 24px; }
 .booking-success.is-shown { display: block; }
@@ -922,4 +922,15 @@ p { margin: 0; }
   .wa-animated, .wa-animated span, .wa-animated .wa-avatar, .wa-animated svg { animation: none; }
   .wa-animated svg { width: 0; opacity: 0; }
   .testi { transition: none; }
+}
+
+/* ---------- Desktop lebar: pita ticker terisi + wadah lebih lebar ---------- */
+@media (min-width: 1024px) {
+  .velox-overshoot-ticker {
+    --overshoot-ticker-card-max: 480px;
+    --overshoot-ticker-angle: 20deg;
+    height: 88vh;
+    height: 88svh;
+    min-height: 560px;
+  }
 }
