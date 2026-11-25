@@ -394,17 +394,6 @@ p { margin: 0; }
 .plan__cur { font-size: 18px; }
 .plan__per { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
 .plan .btn { width: 100%; justify-content: center; margin-bottom: 20px; }
-.plan__group { border-top: 1px solid var(--line); padding-top: 16px; }
-.plan__group h4 {
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
-.plan__group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.plan__group li { display: flex; gap: 8px; align-items: flex-start; font-size: 15px; line-height: 1.7; }
-.plan__group li span { color: var(--accent); font-weight: 800; flex: none; }
 
 /* ---------- Before / after ---------- */
 .ba-layout { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 48px; align-items: center; }
@@ -526,7 +515,7 @@ p { margin: 0; }
 }
 .step h3 { font-size: 18px; margin-bottom: 8px; }
 .step p { color: var(--muted); font-size: 15px; line-height: 1.7; }
-.step__img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; margin-bottom: 16px; background: var(--mint-soft); }
+.step__img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; margin: 16px auto 0; background: var(--mint-soft); }
 
 /* ---------- Testimonials (carousel, satu tampil) ---------- */
 .testi-carousel { max-width: 780px; margin-inline: auto; }
@@ -904,6 +893,7 @@ p { margin: 0; }
   .doctor-card { grid-template-columns: 1fr; }
   .doctor-card img { height: 280px; }
   .steps { grid-template-columns: 1fr; }
+  .step__img { max-width: 320px; }
   .hero-stage { height: 360px; }
   .hero-card { width: 220px; height: 310px; margin-left: -110px; }
   .hero-card img { height: 228px; }
