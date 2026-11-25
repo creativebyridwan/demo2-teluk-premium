@@ -415,4 +415,112 @@
   };
   var tickerRoot = document.getElementById("servicesTicker");
   if (tickerRoot) mountOvershootTicker(tickerRoot);
+
+  /* ---------- Service modal (popup info lengkap) ---------- */
+  var SERVICES = {
+    "implant": {
+      title: "زراعة الأسنان",
+      img: "assets/service-implant.jpg",
+      alt: "زراعة الأسنان، برغي زرعة يمسك بالملقط فوق نموذج فك",
+      desc: "نعوض السن المفقود بزرعة تثبت في عظم الفك وتعمل كجذر طبيعي، ثم نركب عليها تاجا يشبه السن الطبيعي في الشكل واللون. قبل الزراعة نجهز تخطيطا رقميا ثلاثي الأبعاد ونعطيك خطة مكتوبة بالتكلفة والمدة.",
+      price: "تبدأ من 2,199 د.ل. للزرعة الواحدة.",
+      includes: ["تخطيط رقمي ثلاثي الأبعاد قبل الزراعة", "خطة مكتوبة بالتكلفة والمدة مسبقا", "متابعة بعد الزراعة للتأكد من ثبات النتيجة"]
+    },
+    "hollywood": {
+      title: "ابتسامة هوليود",
+      img: "assets/service-hollywood.jpg",
+      alt: "ابتسامة هوليود، ابتسامة طبيعية",
+      desc: "نصمم ابتسامة متكاملة تناسب ملامح وجهك ولون بشرتك، بالجمع بين التبييض والفينير حسب حاجتك، ونشرح لك الخيارات والتكلفة قبل أن نبدأ.",
+      price: "التبييض يبدأ من 429 د.ل.، وتصميم ابتسامة هوليود يحدد بعد الاستشارة.",
+      includes: ["تبييض الأسنان: 429 - 959 د.ل.", "الفينير: 489 - 1,099 د.ل. للسن الواحد", "تصميم متكامل يحدد بعد الاستشارة"]
+    },
+    "veneer": {
+      title: "الفينير",
+      img: "assets/service-veneer.jpg",
+      alt: "الفينير، قشرة خزفية يمسك بها الملقط فوق نموذج أسنان",
+      desc: "قشور خزفية رقيقة تلصق على واجهة السن لتصحيح اللون والشكل والفراغات الصغيرة، مع الحفاظ على السن الطبيعي قدر الإمكان.",
+      price: "الفينير: 489 - 1,099 د.ل. للسن الواحد.",
+      includes: ["قشور خزفية رقيقة", "تصحح اللون والشكل", "تحافظ على السن الطبيعي"]
+    },
+    "aligner": {
+      title: "التقويم الشفاف",
+      img: "assets/service-aligner.jpg",
+      alt: "التقويم الشفاف، قالب شفاف يمسك به اليد",
+      desc: "قوالب شفافة شبه غير مرئية تصحح اصطفاف الأسنان تدريجيا دون أسلاك معدنية، ويمكن إزالتها عند الأكل وتنظيف الأسنان.",
+      price: "يحدد بعد الفحص والاستشارة.",
+      includes: ["قوالب شفافة شبه غير مرئية", "بدون أسلاك معدنية", "قابلة للإزالة عند الأكل وتنظيف الأسنان"]
+    },
+    "root-canal": {
+      title: "علاج الجذور",
+      img: "assets/service-root-canal.jpg",
+      alt: "علاج الجذور، ملف قناة الجذر تحت المجهر مع حاجز مطاطي",
+      desc: "علاج دقيق يزيل الالتهاب من داخل السن ويحافظ عليه بدلا من خلعه، ثم نغلق القناة بحشو يحمي السن على المدى الطويل.",
+      price: "علاج الجذور: يحدد بعد الفحص.",
+      includes: ["حشو تجميلي: 86 - 189 د.ل.", "حشوات بلون السن الطبيعي", "علاج دقيق يحافظ على السن الطبيعي"]
+    },
+    "filling": {
+      title: "حشو الأسنان",
+      img: "assets/service-filling.jpg",
+      alt: "حشو الأسنان، علاج السن",
+      desc: "نعالج التسوس بحشوات تجميلية بلون السن الطبيعي، تعيد للسن شكله ووظيفته وتحافظ على بنيته.",
+      price: "الحشو التجميلي: 86 - 189 د.ل.",
+      includes: ["حشوات تجميلية بلون السن الطبيعي", "تدوم طويلا", "تحافظ على بنية السن"]
+    },
+    "cleaning": {
+      title: "تنظيف الأسنان",
+      img: "assets/service-cleaning.jpg",
+      alt: "تنظيف الأسنان بالموجات فوق الصوتية",
+      desc: "جلسة تنظيف وتلميع تزيل الجير والتصبغات وتحافظ على صحة اللثة، مع فحص شامل للأسنان واللثة.",
+      price: "الكشف والاستشارة يبدآن من 27 د.ل.",
+      includes: ["فحص شامل للثة والأسنان", "تنظيف بالموجات فوق الصوتية", "تلميع يحافظ على بياض الأسنان"]
+    }
+  };
+  var modal = document.getElementById("serviceModal");
+  var modalImg = document.getElementById("serviceModalImg");
+  var modalTitle = document.getElementById("serviceModalTitle");
+  var modalDesc = document.getElementById("serviceModalDesc");
+  var modalPrice = document.getElementById("serviceModalPrice");
+  var modalIncludes = document.getElementById("serviceModalIncludes");
+  var lastTrigger = null;
+  function openServiceModal(key, trigger) {
+    var data = SERVICES[key];
+    if (!data || !modal) return;
+    lastTrigger = trigger || null;
+    modalImg.src = data.img;
+    modalImg.alt = data.alt;
+    modalTitle.textContent = data.title;
+    modalDesc.textContent = data.desc;
+    modalPrice.textContent = data.price;
+    modalIncludes.innerHTML = "";
+    data.includes.forEach(function (item) {
+      var li = document.createElement("li");
+      var check = document.createElement("span");
+      check.setAttribute("aria-hidden", "true");
+      check.textContent = "✓";
+      li.appendChild(check);
+      li.appendChild(document.createTextNode(item));
+      modalIncludes.appendChild(li);
+    });
+    modal.hidden = false;
+    document.body.classList.add("modal-open");
+    var closeBtn = modal.querySelector(".service-modal__close");
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeServiceModal() {
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove("modal-open");
+    if (lastTrigger) lastTrigger.focus();
+  }
+  if (modal) {
+    document.querySelectorAll(".service-card__more").forEach(function (btn) {
+      btn.addEventListener("click", function () { openServiceModal(btn.getAttribute("data-service"), btn); });
+    });
+    modal.querySelectorAll("[data-close]").forEach(function (el) {
+      el.addEventListener("click", closeServiceModal);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeServiceModal();
+    });
+  }
 })();
