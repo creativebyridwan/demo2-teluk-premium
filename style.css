@@ -28,6 +28,8 @@
 
 html { scroll-behavior: smooth; }
 
+html, body { overflow-x: clip; }
+
 body {
   margin: 0;
   background: var(--bg);
