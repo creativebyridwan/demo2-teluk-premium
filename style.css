@@ -876,6 +876,8 @@ body.modal-open { overflow: hidden; }
 
 /* ---------- Reveal ---------- */
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity 600ms ease, transform 600ms ease; }
+.reveal--right { transform: translateX(28px); }
+.reveal--left { transform: translateX(-28px); }
 .reveal.is-visible { opacity: 1; transform: none; }
 
 /* ---------- Responsive ---------- */
@@ -928,7 +930,7 @@ body.modal-open { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal, .reveal--right, .reveal--left { opacity: 1; transform: none; transition: none; }
   .btn, .wa-float { transition: none; }
   .hero-logos-track { animation: none; }
   .hero-card { transition: none; }
